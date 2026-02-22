@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VagaCerta — Seu agente de recolocação profissional</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:        #0A66C2;
+    --azul-escuro: #004182;
+    --azul-claro:  #EAF0F8;
+    --azul-medio:  #D0E3F7;
+    --branco:      #FFFFFF;
+    --cinza-claro: #F3F2EF;
+    --cinza-texto: #56687A;
+    --preto:       #1B1F23;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--branco);
+    color: var(--preto);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--branco);
+    border-bottom: 1px solid #DDDDD8;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  .logo {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--azul);
+    letter-spacing: -0.5px;
+  }
+
+  .logo em {
+    font-style: normal;
+    color: var(--preto);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-links a {
+    color: var(--cinza-texto);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--azul); }
+
+  .btn-header {
+    background: var(--azul);
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-header:hover { background: var(--azul-escuro); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul) 60%, #1E88E5 100%);
+    color: var(--branco);
+    padding: 96px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 60px;
+    background: var(--branco);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--branco);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    max-width: 780px;
+    margin: 0 auto 24px;
+  }
+
+  .hero h1 span {
+    color: #90CAF9;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 540px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+  }
+
+  .btn-primary {
+    background: var(--branco);
+    color: var(--azul);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--azul-claro); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--branco);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 100px;
+    border: 2px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--branco); background: rgba(255,255,255,0.1); }
+
+  /* ── NÚMEROS ── */
+  .numeros {
+    background: var(--cinza-claro);
+    padding: 56px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .numero-item {
+    text-align: center;
+    padding: 24px 48px;
+    border-right: 1px solid #DDDDD8;
+  }
+  .numero-item:last-child { border-right: none; }
+
+  .numero-valor {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: 2.6rem;
+    color: var(--azul);
+    display: block;
+    letter-spacing: -1px;
+  }
+
+  .numero-label {
+    font-size: 0.85rem;
+    color: var(--cinza-texto);
+    margin-top: 4px;
+    max-width: 160px;
+  }
+
+  /* ── SEÇÕES ── */
+  .secao {
+    padding: 80px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .secao-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--azul);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .secao h2 {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 56px;
+    max-width: 560px;
+    color: var(--preto);
+  }
+
+  /* ── STEPS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+  }
+
+  .step {
+    background: var(--branco);
+    border: 1px solid #DDDDD8;
+    border-radius: 12px;
+    padding: 36px 28px;
+    transition: all 0.25s;
+    position: relative;
+  }
+  .step:hover { border-color: var(--azul); box-shadow: 0 4px 20px rgba(10,102,194,0.1); transform: translateY(-3px); }
+
+  .step-num {
+    width: 36px; height: 36px;
+    background: var(--azul);
+    color: var(--branco);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .step-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+
+  .step h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--preto);
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: var(--cinza-texto);
+    line-height: 1.65;
+  }
+
+  /* ── PLANOS ── */
+  .planos-bg {
+    background: var(--cinza-claro);
+    padding: 80px 48px;
+  }
+
+  .planos-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .planos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .plano {
+    background: var(--branco);
+    border: 1px solid #DDDDD8;
+    border-radius: 12px;
+    padding: 36px 28px;
+    position: relative;
+    transition: all 0.25s;
+  }
+  .plano:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); transform: translateY(-3px); }
+
+  .plano.destaque {
+    border: 2px solid var(--azul);
+    background: var(--branco);
+  }
+
+  .plano-badge {
+    position: absolute;
+    top: -13px;
+    left: 28px;
+    background: var(--azul);
+    color: var(--branco);
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 4px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .plano-nome {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--cinza-texto);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .plano-preco {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+    color: var(--preto);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .plano-preco span {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--cinza-texto);
+    letter-spacing: 0;
+  }
+
+  .plano-desc {
+    font-size: 0.85rem;
+    color: var(--cinza-texto);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .plano-itens {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .plano-itens li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--preto);
+  }
+
+  .plano-itens li::before {
+    content: '✓';
+    color: var(--azul);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .btn-plano {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .btn-plano-outline {
+    background: transparent;
+    color: var(--azul);
+    border: 2px solid var(--azul);
+  }
+  .btn-plano-outline:hover { background: var(--azul-claro); }
+
+  .btn-plano-filled {
+    background: var(--azul);
+    color: var(--branco);
+  }
+  .btn-plano-filled:hover { background: var(--azul-escuro); }
+
+  /* ── DEPOIMENTOS ── */
+  .depoimentos-bg {
+    background: var(--azul-escuro);
+    padding: 80px 48px;
+  }
+
+  .depoimentos-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .depoimentos-inner .secao-label {
+    color: #90CAF9;
+  }
+
+  .depoimentos-inner h2 {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--branco);
+    margin-bottom: 48px;
+    letter-spacing: -0.5px;
+  }
+
+  .depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .depoimento {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: all 0.25s;
+  }
+  .depoimento:hover {
+    background: rgba(255,255,255,0.11);
+    transform: translateY(-3px);
+  }
+
+  .depoimento-estrelas {
+    color: #FFB800;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .depoimento-texto {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .depoimento-autor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .depoimento-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--branco);
+    flex-shrink: 0;
+  }
+
+  .depoimento-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--branco);
+    font-weight: 600;
+  }
+
+  .depoimento-info span {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── FORMULÁRIO ── */
+  .form-section {
+    padding: 80px 48px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .form-section h2 {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  .form-section > p {
+    color: var(--cinza-texto);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .form input, .form select, .form textarea {
+    background: var(--branco);
+    border: 1px solid #DDDDD8;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: var(--preto);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  .form input:focus, .form select:focus, .form textarea:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(10,102,194,0.12);
+  }
+
+  .form textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .btn-form {
+    background: var(--azul);
+    color: var(--branco);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .btn-form:hover { background: var(--azul-escuro); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(10,102,194,0.3); }
+
+  .form-obs {
+    text-align: center;
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 10px;
+  }
+
+  .success-msg {
+    display: none;
+    background: #E8F4FD;
+    border: 1px solid var(--azul);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: var(--azul-escuro);
+    font-weight: 600;
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--preto);
+    color: rgba(255,255,255,0.5);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer .logo { color: var(--branco); font-size: 1.1rem; }
+  footer p { font-size: 0.8rem; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: #DDDDD8;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 72px 24px; }
+    .numeros { padding: 40px 24px; }
+    .numero-item { border-right: none; border-bottom: 1px solid #DDDDD8; width: 50%; padding: 20px; }
+    .secao, .form-section { padding: 60px 24px; }
+    .planos-bg { padding: 60px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Vaga<em>Certa</em></div>
+  <nav class="nav-links">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#planos">Planos</a>
+    <a href="#cadastro">Cadastrar</a>
+  </nav>
+  <a href="#cadastro" class="btn-header">Começar agora</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ Inteligência Artificial + LinkedIn</div>
+  <h1>A vaga certa,<br>com o currículo <span>certo</span></h1>
+  <p>Nosso agente varre o LinkedIn, encontra vagas alinhadas ao seu perfil e adapta seu currículo automaticamente. Você só envia o e-mail.</p>
+  <div class="hero-ctas">
+    <a href="#cadastro" class="btn-primary">Quero começar →</a>
+    <a href="#como-funciona" class="btn-outline">Ver como funciona</a>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<div class="numeros">
+  <div class="numero-item">
+    <span class="numero-valor">3x</span>
+    <span class="numero-label">mais candidaturas por semana</span>
+  </div>
+  <div class="numero-item">
+    <span class="numero-valor">100%</span>
+    <span class="numero-label">currículo adaptado para cada vaga</span>
+  </div>
+  <div class="numero-item">
+    <span class="numero-valor">-90%</span>
+    <span class="numero-label">tempo em buscas manuais</span>
+  </div>
+  <div class="numero-item">
+    <span class="numero-valor">24h</span>
+    <span class="numero-label">entrega após o cadastro</span>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section class="secao" id="como-funciona">
+  <p class="secao-label">Como funciona</p>
+  <h2>Simples, rápido e totalmente automático</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <span class="step-icon">📋</span>
+      <h3>Você envia seu currículo</h3>
+      <p>Nos manda seu currículo e as áreas que deseja atuar. Nós cuidamos do resto.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <span class="step-icon">🔍</span>
+      <h3>Buscamos vagas no LinkedIn</h3>
+      <p>Nosso agente varre posts de recrutadores com vagas alinhadas ao seu perfil.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <span class="step-icon">🤖</span>
+      <h3>IA adapta seu currículo</h3>
+      <p>Para cada vaga, a inteligência artificial personaliza seu currículo com as palavras-chave certas.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <span class="step-icon">📊</span>
+      <h3>Você recebe e envia</h3>
+      <p>Entregamos uma planilha com vagas, e-mails e currículo adaptado. Você só envia!</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLANOS -->
+<section class="planos-bg" id="planos">
+  <div class="planos-inner">
+    <p class="secao-label">Planos</p>
+    <h2 style="font-family:'Merriweather',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:48px;">Escolha o seu plano</h2>
+    <div class="planos-grid">
+      <div class="plano">
+        <p class="plano-nome">Básico</p>
+        <p class="plano-preco">R$97<span>/mês</span></p>
+        <p class="plano-desc">Para quem está começando a busca</p>
+        <ul class="plano-itens">
+          <li>1 busca por semana</li>
+          <li>Até 20 e-mails por mês</li>
+          <li>Currículo adaptado por vaga</li>
+          <li>Planilha com resultados</li>
+        </ul>
+        <a href="#cadastro" class="btn-plano btn-plano-outline">Começar</a>
+      </div>
+      <div class="plano destaque">
+        <div class="plano-badge">Mais popular</div>
+        <p class="plano-nome">Pro</p>
+        <p class="plano-preco">R$197<span>/mês</span></p>
+        <p class="plano-desc">Para quem quer acelerar a recolocação</p>
+        <ul class="plano-itens">
+          <li>3 buscas por semana</li>
+          <li>Até 60 e-mails por mês</li>
+          <li>Currículo adaptado por vaga</li>
+          <li>Planilha com resultados</li>
+          <li>Suporte via WhatsApp</li>
+        </ul>
+        <a href="#cadastro" class="btn-plano btn-plano-filled">Começar agora</a>
+      </div>
+      <div class="plano">
+        <p class="plano-nome">Premium</p>
+        <p class="plano-preco">R$297<span>/mês</span></p>
+        <p class="plano-desc">Para máxima exposição no mercado</p>
+        <ul class="plano-itens">
+          <li>Busca diária</li>
+          <li>E-mails ilimitados</li>
+          <li>Currículo adaptado por vaga</li>
+          <li>Planilha com resultados</li>
+          <li>Suporte prioritário</li>
+          <li>Revisão mensal do currículo</li>
+        </ul>
+        <a href="#cadastro" class="btn-plano btn-plano-outline">Começar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos-bg">
+  <div class="depoimentos-inner">
+    <p class="secao-label">Depoimentos</p>
+    <h2>Quem já encontrou a vaga certa</h2>
+    <div class="depoimentos-grid">
+
+      <div class="depoimento">
+        <div class="depoimento-estrelas">★★★★★</div>
+        <p class="depoimento-texto">"Em menos de 2 semanas recebi 3 entrevistas. O currículo adaptado fez toda a diferença — cada recrutador comentou que meu perfil estava muito alinhado à vaga."</p>
+        <div class="depoimento-autor">
+          <div class="depoimento-avatar" style="background: #1565C0;">RM</div>
+          <div class="depoimento-info">
+            <strong>Ricardo Mendonça</strong>
+            <span>Diretor de Produtos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-estrelas">★★★★★</div>
+        <p class="depoimento-texto">"Eu ficava horas procurando vaga no LinkedIn e nunca achava o e-mail dos recrutadores. O VagaCerta encontrou 18 contatos em uma semana. Me recoloquei no segundo mês!"</p>
+        <div class="depoimento-autor">
+          <div class="depoimento-avatar" style="background: #00695C;">CF</div>
+          <div class="depoimento-info">
+            <strong>Camila Fonseca</strong>
+            <span>Coordenadora de Vendas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-estrelas">★★★★★</div>
+        <p class="depoimento-texto">"Fiquei desempregado 4 meses tentando sozinho. Com o VagaCerta, em 3 semanas já tinha uma proposta em mãos. O custo-benefício é excelente."</p>
+        <div class="depoimento-autor">
+          <div class="depoimento-avatar" style="background: #6A1B9A;">TS</div>
+          <div class="depoimento-info">
+            <strong>Thiago Silveira</strong>
+            <span>Analista Financeiro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento">
+        <div class="depoimento-estrelas">★★★★★</div>
+        <p class="depoimento-texto">"Trabalho no setor bancário há 12 anos e achei que seria difícil me recolocar. O serviço encontrou vagas que eu nem sabia que existiam e personalizou meu currículo perfeitamente."</p>
+        <div class="depoimento-autor">
+          <div class="depoimento-avatar" style="background: #C62828;">PA</div>
+          <div class="depoimento-info">
+            <strong>Paulo Andrade</strong>
+            <span>Gerente Bancário</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="form-section" id="cadastro">
+  <p class="secao-label">Cadastro</p>
+  <h2>Quero encontrar a vaga certa</h2>
+  <p>Preencha abaixo e entraremos em contato em até 24 horas para dar início ao seu processo.</p>
+  <form class="form" onsubmit="enviar(event)">
+    <div class="form-row">
+      <input type="text" placeholder="Nome completo" required />
+      <input type="tel" placeholder="WhatsApp" required />
+    </div>
+    <input type="email" placeholder="Seu melhor e-mail" required />
+    <input type="text" placeholder="Área de atuação (ex: Supply Chain, Compras)" required />
+    <select required>
+      <option value="" disabled selected>Escolha seu plano</option>
+      <option>Básico — R$97/mês</option>
+      <option>Pro — R$197/mês</option>
+      <option>Premium — R$297/mês</option>
+    </select>
+    <textarea placeholder="Conte brevemente sua experiência e nível atual (ex: Analista Sênior, 10 anos em Suprimentos)"></textarea>
+    <button type="submit" class="btn-form">Quero minha vaga certa →</button>
+  </form>
+  <p class="form-obs">Sem fidelidade. Cancele quando quiser.</p>
+  <div class="success-msg" id="success">
+    ✅ Recebemos seu cadastro! Entraremos em contato em até 24h pelo WhatsApp.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Vaga<em style="color:rgba(255,255,255,0.4);font-style:normal;">Certa</em></div>
+  <p>© 2026 VagaCerta. Tecnologia a serviço da sua carreira.</p>
+</footer>
+
+<script>
+  function enviar(e) {
+    e.preventDefault();
+    document.querySelector('.form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

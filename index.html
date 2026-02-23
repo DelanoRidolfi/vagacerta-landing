@@ -725,7 +725,7 @@
           <li>Currículo adaptado por vaga</li>
           <li>Planilha com resultados</li>
         </ul>
-        <a href="#cadastro" class="btn-plano btn-plano-outline">Começar</a>
+        <a href="https://pay.kiwify.com.br/v2lsI7x" target="_blank" class="btn-plano btn-plano-outline">Começar</a>
       </div>
       <div class="plano destaque">
         <div class="plano-badge">Mais popular</div>
@@ -739,7 +739,7 @@
           <li>Planilha com resultados</li>
           <li>Suporte via WhatsApp</li>
         </ul>
-        <a href="#cadastro" class="btn-plano btn-plano-filled">Começar agora</a>
+        <a href="https://pay.kiwify.com.br/xLC3kio" target="_blank" class="btn-plano btn-plano-filled">Começar agora</a>
       </div>
       <div class="plano">
         <p class="plano-nome">Premium</p>
@@ -753,7 +753,7 @@
           <li>Suporte prioritário</li>
           <li>Revisão mensal do currículo</li>
         </ul>
-        <a href="#cadastro" class="btn-plano btn-plano-outline">Começar</a>
+        <a href="https://pay.kiwify.com.br/gbEAY4h" target="_blank" class="btn-plano btn-plano-outline">Começar</a>
       </div>
     </div>
   </div>
@@ -825,18 +825,18 @@
   <p>Preencha abaixo e entraremos em contato em até 24 horas para dar início ao seu processo.</p>
   <form class="form" onsubmit="enviar(event)">
     <div class="form-row">
-      <input type="text" placeholder="Nome completo" required />
-      <input type="tel" placeholder="WhatsApp" required />
+      <input id="f-nome" type="text" placeholder="Nome completo" required />
+      <input id="f-tel" type="tel" placeholder="WhatsApp (com DDD)" required />
     </div>
-    <input type="email" placeholder="Seu melhor e-mail" required />
-    <input type="text" placeholder="Área de atuação (ex: Supply Chain, Compras)" required />
-    <select required>
+    <input id="f-email" type="email" placeholder="Seu melhor e-mail" required />
+    <input id="f-area" type="text" placeholder="Área de atuação (ex: Supply Chain, Compras)" required />
+    <select id="f-plano" required>
       <option value="" disabled selected>Escolha seu plano</option>
-      <option>Básico — R$97/mês</option>
-      <option>Pro — R$197/mês</option>
-      <option>Premium — R$297/mês</option>
+      <option value="Básico — R$97/mês">Básico — R$97/mês</option>
+      <option value="Pro — R$197/mês">Pro — R$197/mês</option>
+      <option value="Premium — R$297/mês">Premium — R$297/mês</option>
     </select>
-    <textarea placeholder="Conte brevemente sua experiência e nível atual (ex: Analista Sênior, 10 anos em Suprimentos)"></textarea>
+    <textarea id="f-desc" placeholder="Conte brevemente sua experiência e nível atual (ex: Analista Sênior, 10 anos em Suprimentos)" rows="4"></textarea>
     <button type="submit" class="btn-form">Quero minha vaga certa →</button>
   </form>
   <p class="form-obs">Sem fidelidade. Cancele quando quiser.</p>
@@ -854,9 +854,39 @@
 <script>
   function enviar(e) {
     e.preventDefault();
-    document.querySelector('.form').style.display = 'none';
-    document.getElementById('success').style.display = 'block';
-    document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
+
+    const nome  = document.getElementById('f-nome').value;
+    const tel   = document.getElementById('f-tel').value;
+    const email = document.getElementById('f-email').value;
+    const area  = document.getElementById('f-area').value;
+    const plano = document.getElementById('f-plano').value;
+    const desc  = document.getElementById('f-desc').value;
+
+    const assunto = encodeURIComponent(`VagaCerta — Novo Cadastro: ${nome}`);
+    const corpo   = encodeURIComponent(
+`Novo cadastro recebido pelo site VagaCerta!
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+DADOS DO INTERESSADO
+━━━━━━━━━━━━━━━━━━━━━━━━
+Nome:     ${nome}
+Telefone: ${tel}
+E-mail:   ${email}
+Plano:    ${plano}
+Área:     ${area}
+
+Descritivo / Experiência:
+${desc}
+━━━━━━━━━━━━━━━━━━━━━━━━`
+    );
+
+    window.location.href = `mailto:delanorvidigal@gmail.com?subject=${assunto}&body=${corpo}`;
+
+    setTimeout(() => {
+      document.querySelector('.form').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
+    }, 1000);
   }
 </script>
 </body>
